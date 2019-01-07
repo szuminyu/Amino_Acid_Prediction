@@ -1,1 +1,0 @@
-# Amino_Acid_Prediction
