@@ -66,32 +66,6 @@ print("Train Output Shape: ", train_output.shape)
 
 
 
-####### try to get the triangle from the matrix #######
-
-####my code
-train_output = []
-file = np.load('/Users/Sumin/Desktop/python/train_output.npz')
-for key in file:
-    train_output.append(file[key])
-
-train_output_a = []
-for i in range(0, 4554):
-    length = len(train_output[i])
-    train_output_a.append(train_output[i][np.triu_indices(length, k=1)])
-
-####River's
-
-train_output = []
-file = np.load('/Users/Sumin/Desktop/python/train_output.npz')
-for key in file:
-    train_output.append(file[key])
-
-    train_output_a = []
-    for i in train_output:
-        train_output_a.append(i[np.triu_indices(len(i), k=1)])
-
-####
-
 
 
 train_output_a = np.array(train_output_a)
@@ -135,13 +109,3 @@ model.fit(train_input,
                     verbose=2)
 
 
-
-##experiment
-
-model = keras.Sequential()
-model.add(keras.layers.LSTM(100, input_shape = (1,1382)))
-model.add(keras.layers.Activation('relu'))
-model.add(keras.layers.Dense(1,activation='relu'))
-model.compile(loss='mean_squared_error', optimizer='adam')
-
-model.fit(train_input, train_output_a, epochs = 10, validation_split = 0.2, verbose = 2)
